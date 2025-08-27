@@ -1,14 +1,13 @@
 import tkinter as tk
 import random
 
-screen = tk.Tk()
-screen.attributes('-fullscreen', True)
+menu = tk.Tk()
+menu.attributes('-fullscreen', True)
 
-block
 def key_press(event):
     if event.keysym == 'Escape':
-        screen.attributes('-fullscreen', False)
+        menu.attributes('-fullscreen', False)
         quit()
 
-screen.bind('<KeyPress>', key_press)
-screen.mainloop()
+menu.bind('<KeyPress>', key_press)
+menu.mainloop()
