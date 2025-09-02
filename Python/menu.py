@@ -20,13 +20,13 @@ mainscreen.geometry("800x600")
 fullscreen = Button(mainscreen, text ='Fullscreen', width = 25, height = 10, command = lambda: toggle_fullscreen(mainscreen))
 fullscreen.place(x=400, y=400)
 
-snake_but = Button(mainscreen, text ='Snake', width = 25, height = 10, command = lambda: [snake.start_snek, hide_all()])
+snake_but = Button(mainscreen, text ='Snake', width = 25, height = 10, command = lambda: [snake.start_snek(), hide_all()])
 snake_but.place(x=200, y=200)
 
-black_but = Button(mainscreen, text ='Blackjack', width = 25, height = 10, command = lambda: [black.start_black, hide_all()])
+black_but = Button(mainscreen, text ='Blackjack', width = 25, height = 10, command = lambda: [black.start_black(), hide_all()])
 black_but.place(x=200, y=400)
 
-tet_but = Button(mainscreen, text = 'Tetris', width = 25, height = 10, command = lambda: [tet.tet_start, hide_all()])
+tet_but = Button(mainscreen, text = 'Tetris', width = 25, height = 10, command = lambda: [tet.tet_start(), hide_all()])
 tet_but.place(x=400, y=200)
 
 button.extend([snake_but, fullscreen, black_but, tet_but])
