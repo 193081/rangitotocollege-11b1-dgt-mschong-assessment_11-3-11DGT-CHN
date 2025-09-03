@@ -1,4 +1,4 @@
-import random
+from random import randint
 from turtle import *
 import time
 
@@ -76,7 +76,7 @@ def start_snek():
     while True:
         wn.update()
 
-        if abs(head.xcor()) > 290 or abs(head.ycor()) > 290:
+        if abs(head.xcor()) > 300 or abs(head.ycor()) > 300:
             time.sleep(1)
             head.goto(0, 0)
             head.direction = "stop"
@@ -89,8 +89,8 @@ def start_snek():
             pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Courier", 18, "normal"))
 
         if head.distance(food) < 20:
-            x = random.randint(-14, 14) * 20
-            y = random.randint(-14, 14) * 20
+            x = randint(-14, 14) * 20
+            y = randint(-14, 14) * 20
             food.goto(x, y)
             new_segment = Turtle()
             new_segment.speed(0)
