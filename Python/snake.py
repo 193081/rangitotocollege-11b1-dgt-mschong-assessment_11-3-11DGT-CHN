@@ -2,7 +2,6 @@ from random import randint
 from turtle import *
 import time
 
-
 def start_snek():
 
     delay = 0.1
@@ -12,8 +11,19 @@ def start_snek():
     wn = Screen()
     wn.title("Snake with Turtle")
     wn.bgcolor("black")
-    wn.setup(width=600, height=600)
+    wn.setup(width=1000, height=800)
     wn.tracer(0)
+
+    frame = Turtle()
+    frame.hideturtle()
+    frame.color("white")   
+    frame.penup()
+    frame.goto(-410, -410)
+    frame.pendown()
+    for i in range(4):
+        frame.forward(820)
+        frame.left(90)
+
 
     head = Turtle()
     head.speed(0)
@@ -37,7 +47,7 @@ def start_snek():
     pen.color("white")
     pen.penup()
     pen.hideturtle()
-    pen.goto(0, 260)
+    pen.goto(0, 300)
     pen.write("Score: 0  High Score: 0", align="center", font=("Courier", 18, "normal"))
 
     def go_up():
@@ -76,7 +86,7 @@ def start_snek():
     while True:
         wn.update()
 
-        if abs(head.xcor()) > 300 or abs(head.ycor()) > 300:
+        if abs(head.xcor()) > 400 or abs(head.ycor()) > 400:
             time.sleep(1)
             head.goto(0, 0)
             head.direction = "stop"
@@ -89,8 +99,8 @@ def start_snek():
             pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Courier", 18, "normal"))
 
         if head.distance(food) < 20:
-            x = randint(-14, 14) * 20
-            y = randint(-14, 14) * 20
+            x = randint(-20, 20) * 20
+            y = randint(-20, 20) * 20
             food.goto(x, y)
             new_segment = Turtle()
             new_segment.speed(0)
