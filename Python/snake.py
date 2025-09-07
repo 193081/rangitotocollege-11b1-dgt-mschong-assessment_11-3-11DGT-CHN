@@ -139,5 +139,5 @@ def start_snek():
 
         time.sleep(delay)
 
-if __name__ == "__menu__":
+if __name__ == "__main__":
     start_snek()
