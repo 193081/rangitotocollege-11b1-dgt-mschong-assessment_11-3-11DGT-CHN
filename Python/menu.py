@@ -13,7 +13,6 @@ def default_color(item):
 
 def random_game(window):
     i = randint(0,3)
-    exit = 0
     if i == 0:
         snake.start_snek()
     elif i == 1:
@@ -22,7 +21,6 @@ def random_game(window):
         tet.tet_start()
     elif i == 3:
         window.quit()
-    return exit
 
 mainscreen = Tk()
 mainscreen.title('Just another game compendium')

@@ -5,13 +5,26 @@ import time
 
 def start_black():
     delay = 0.1
-    score = 100
-    high_score = 100
     maxvalue = 21
     aimax = 17
     values = {'J': 10, 'Q': 10, 'K': 10, 'T': 10}  # Include 'T' for 10 cards
-    player_value = 0  # Initialize player's hand value
-    k = 0
+    k = 2 # Counter for number of cards drawn by player
+
+    def calculate_hand_value(cards, values, maxvalue):
+        value = 0
+        aces = 0
+        for card in cards:
+            if card.name == 'A':
+                value += 11
+                aces += 1
+            elif card.name in values:
+                value += values[card.name]
+            else:
+                value += int(card.name)
+        while value > maxvalue and aces:
+            value -= 10
+            aces -= 1
+        return value
 
     wn = Screen()
     wn.title("Blackjack with Turtle")
@@ -35,7 +48,7 @@ def start_black():
     pen.penup()
     pen.hideturtle()
     pen.goto(0, 300)
-    pen.write("Score: 0  High Score: 0", align="center", font=("Courier", 18, "normal"))
+    pen.write("Score: 0  High Score: 0", align="center", font=("Consolas", 18, "normal"))
 
 #Credit to TokyoEdTech for the Card and Deck classes
 #https://www.youtube.com/watch?v=J8dkgM2g1hY
@@ -67,15 +80,15 @@ def start_black():
                 else:    
                     pen.color("black")
                 pen.goto(x-18, y-30)
-                pen.write(self.symbols[self.suit], False, font=("Courier New", 48, "normal"))
+                pen.write(self.symbols[self.suit], False, font=("Consolas New", 48, "normal"))
                 pen.goto(x-40, y+45)
-                pen.write(self.name, False, font=("Courier New", 18, "normal"))
+                pen.write(self.name, False, font=("Consolas New", 18, "normal"))
                 pen.goto(x-40, y+25)
-                pen.write(self.symbols[self.suit], False, font=("Courier New", 18, "normal"))
+                pen.write(self.symbols[self.suit], False, font=("Consolas New", 18, "normal"))
                 pen.goto(x+30, y-60)
-                pen.write(self.name, False, font=("Courier New", 18, "normal"))
+                pen.write(self.name, False, font=("Consolas New", 18, "normal"))
                 pen.goto(x+30, y-80)
-                pen.write(self.symbols[self.suit], False, font=("Courier New", 18, "normal"))
+                pen.write(self.symbols[self.suit], False, font=("Consolas New", 18, "normal"))
 
     class Deck():
         def __init__(self):
@@ -112,27 +125,22 @@ def start_black():
     ai_cards = []
 
     # Deal 2 initial cards
-    start_x = -250
+    start_x = -300
     for i in range(2):
         card = deck.get_card()
         player_cards.append(card)
-        card.render(start_x + i * 125, 0, pen)
-        # Calculate player value
-        if card.name in values:
-            player_value += values[card.name]
-        elif card.name == 'A':
-            if player_value + 11 > maxvalue:
-                player_value += 1
-            else:
-                player_value += 11
-        else:
-            player_value += int(card.name)
+        card.render(start_x + i * 125, -70, pen)
+    ai_cards.append(card)
+    card.render(-300, 100, pen)
+    player_value = calculate_hand_value(player_cards, values, maxvalue)
+    ai_value = calculate_hand_value(ai_cards, values, maxvalue)
+
 
     hit = Turtle()
     hit.hideturtle()
     hit.penup()
     hit.speed(0)
-    hit.goto(-100, -150)
+    hit.goto(-200, -200)
     hit.fillcolor("lightblue")
     hit.begin_fill()
     for _ in range(2):
@@ -141,16 +149,16 @@ def start_black():
         hit.forward(40)
         hit.left(90)
     hit.end_fill()
-    hit.goto(-50, -140)
+    hit.goto(-150, -190)
     hit.color("black")
-    hit.write("HIT", align="center", font=("Courier", 20, "bold"))
+    hit.write("HIT", align="center", font=("Consolas", 20, "bold"))
     hit.color("white")
 
     stand = Turtle()
     stand.hideturtle()
     stand.penup()
     stand.speed(0)
-    stand.goto(100, -100)
+    stand.goto(100, -200)
     stand.fillcolor("lightblue")
     stand.begin_fill()
     for _ in range(2):
@@ -159,43 +167,59 @@ def start_black():
         stand.forward(40)
         stand.left(90)
     stand.end_fill()
-    stand.goto(150, -90)
+    stand.goto(150, -190)
     stand.color("black")
-    stand.write("STAND", align="center", font=("Courier", 20, "bold"))
+    stand.write("STAND", align="center", font=("Consolas", 20, "bold"))
     stand.color("white")
 
     def hit_click(x, y):
         nonlocal player_value
-        if -100 <= x <= 0 and -150 <= y <= -110:
+        nonlocal k
+        if -200 <= x <= -100 and -200 <= y <= -160:
             card = deck.get_card()
             player_cards.append(card)
-            card.render(-250 + len(player_cards) * 125, 0, pen)
-            if card.name in values:
-                player_value += values[card.name]
-            elif card.name == 'A':
-                if player_value + 11 > maxvalue:
-                    player_value += 1
-                else:
-                    player_value += 11
-            else:
-                player_value += int(card.name)
+            card.render(-300 + k * 125, -70, pen)
+            k += 1
+            player_value = calculate_hand_value(player_cards, values, maxvalue)
             print(f"Player value: {player_value}")
-
             if player_value > maxvalue:
                 pen.color("black")
                 pen.goto(0, -250)
-                pen.write("You Bust! Press Space to Play Again", align="center", font=("Courier", 18, "normal"))
+                pen.write("You Bust! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
                 wn.onkey(reset_game, "space")
                 wn.listen()
 
     def stand_click(x, y):
-        if 100 <= x <= 200 and -100 <= y <= -60:
+        if 100 <= x <= 200 and -200 <= y <= -160:
             pen.color("black")
-            pen.goto(0, -250)
+            nonlocal ai_value
+            nonlocal player_value  
             if player_value == maxvalue:
-                pen.write("Blackjack! You Win! Press Space to Play Again", align="center", font=("Courier", 18, "normal"))
+                pen.goto(0, -250)
+                pen.write("Blackjack! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
             else:
-                pen.write(f"You Stand at {player_value}. Press Space to Play Again", align="center", font=("Courier", 18, "normal"))
+                while ai_value < aimax:
+                    card = deck.get_card()
+                    ai_cards.append(card)
+                    card.render(-425 + len(ai_cards) * 125, 100, pen)
+                    ai_value = calculate_hand_value(ai_cards, values, maxvalue)
+                    print(f"AI value: {ai_value}")
+                if ai_value > maxvalue:
+                    pen.color("black")
+                    pen.goto(0, -250)
+                    pen.write("AI Busts! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+                elif ai_value == player_value:
+                    pen.color("black")
+                    pen.goto(0, -250)
+                    pen.write("It's a Tie! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+                elif ai_value > player_value:
+                    pen.color("black")
+                    pen.goto(0, -250)
+                    pen.write("AI Wins! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+                else:
+                    pen.color("black")
+                    pen.goto(0, -250)
+                    pen.write("You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
             wn.onkey(reset_game, "space")
             wn.listen()
 
@@ -210,6 +234,7 @@ def start_black():
     wn.onclick(button_click)
     wn.listen()
     wn.mainloop()
+    time.sleep(delay)
 
 if __name__ == "__main__":
     start_black()

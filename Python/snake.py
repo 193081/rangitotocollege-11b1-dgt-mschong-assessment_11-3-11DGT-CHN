@@ -48,7 +48,7 @@ def start_snek():
     pen.penup()
     pen.hideturtle()
     pen.goto(0, 300)
-    pen.write("Score: 0  High Score: 0", align="center", font=("Courier", 18, "normal"))
+    pen.write("Score: 0  High Score: 0", align="center", font=("Consolas", 18, "normal"))
 
     def go_up():
         if head.direction != "down":
@@ -96,7 +96,7 @@ def start_snek():
             score = 0
             delay = 0.1
             pen.clear()
-            pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Courier", 18, "normal"))
+            pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Consolas", 18, "normal"))
 
         if head.distance(food) < 20:
             x = randint(-20, 20) * 20
@@ -113,7 +113,7 @@ def start_snek():
             if score > high_score:
                 high_score = score
             pen.clear()
-            pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Courier", 18, "normal"))
+            pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Consolas", 18, "normal"))
 
         for i in range(len(segments)-1, 0, -1):
             x = segments[i-1].xcor()
@@ -135,7 +135,7 @@ def start_snek():
                 score = 0
                 delay = 0.1
                 pen.clear()
-                pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Courier", 18, "normal"))
+                pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Consolas", 18, "normal"))
 
         time.sleep(delay)
 
