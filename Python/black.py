@@ -124,12 +124,13 @@ def start_black():
     player_cards = []
     ai_cards = []
 
-    # Deal 2 initial cards
+    # Deal initial cards
     start_x = -300
     for i in range(2):
         card = deck.get_card()
         player_cards.append(card)
         card.render(start_x + i * 125, -70, pen)
+    card = deck.get_card()
     ai_cards.append(card)
     card.render(-300, 100, pen)
     player_value = calculate_hand_value(player_cards, values, maxvalue)
@@ -198,7 +199,7 @@ def start_black():
                 pen.goto(0, -250)
                 pen.write("Blackjack! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
             else:
-                while ai_value < aimax:
+                while ai_value < aimax and ai_value < player_value:
                     card = deck.get_card()
                     ai_cards.append(card)
                     card.render(-425 + len(ai_cards) * 125, 100, pen)
