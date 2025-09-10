@@ -9,6 +9,7 @@ def start_black():
     aimax = 17
     values = {'J': 10, 'Q': 10, 'K': 10, 'T': 10}  # Include 'T' for 10 cards
     k = 2 # Counter for number of cards drawn by player
+    playing = True
 
     def calculate_hand_value(cards, values, maxvalue):
         value = 0
@@ -47,8 +48,6 @@ def start_black():
     pen.color("white")
     pen.penup()
     pen.hideturtle()
-    pen.goto(0, 300)
-    pen.write("Score: 0  High Score: 0", align="center", font=("Consolas", 18, "normal"))
 
 #Credit to TokyoEdTech for the Card and Deck classes
 #https://www.youtube.com/watch?v=J8dkgM2g1hY
@@ -176,6 +175,9 @@ def start_black():
     def hit_click(x, y):
         nonlocal player_value
         nonlocal k
+        nonlocal playing
+        if playing == False:
+            return
         if -200 <= x <= -100 and -200 <= y <= -160:
             card = deck.get_card()
             player_cards.append(card)
@@ -188,6 +190,14 @@ def start_black():
                 pen.goto(0, -250)
                 pen.write("You Bust! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
                 wn.onkey(reset_game, "space")
+                playing = False
+                wn.listen()
+            elif k == 5 and player_value <= maxvalue:
+                pen.color("black")
+                pen.goto(0, -250)
+                pen.write("Five Card Charlie! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+                wn.onkey(reset_game, "space")
+                playing = False
                 wn.listen()
 
     def stand_click(x, y):
@@ -195,7 +205,10 @@ def start_black():
             pen.color("black")
             nonlocal ai_value
             nonlocal player_value  
-            if player_value == maxvalue:
+            nonlocal playing
+            if not playing:
+                return
+            if player_value == maxvalue and k == 2:
                 pen.goto(0, -250)
                 pen.write("Blackjack! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
             else:
@@ -208,7 +221,7 @@ def start_black():
                 if ai_value > maxvalue:
                     pen.color("black")
                     pen.goto(0, -250)
-                    pen.write("AI Busts! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+                    pen.write("Dealer Busts! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
                 elif ai_value == player_value:
                     pen.color("black")
                     pen.goto(0, -250)
@@ -216,11 +229,12 @@ def start_black():
                 elif ai_value > player_value:
                     pen.color("black")
                     pen.goto(0, -250)
-                    pen.write("AI Wins! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+                    pen.write("Dealer Wins! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
                 else:
                     pen.color("black")
                     pen.goto(0, -250)
                     pen.write("You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
+            playing = False
             wn.onkey(reset_game, "space")
             wn.listen()
 
