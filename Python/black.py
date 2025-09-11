@@ -135,7 +135,6 @@ def start_black():
     player_value = calculate_hand_value(player_cards, values, maxvalue)
     ai_value = calculate_hand_value(ai_cards, values, maxvalue)
 
-
     hit = Turtle()
     hit.hideturtle()
     hit.penup()
