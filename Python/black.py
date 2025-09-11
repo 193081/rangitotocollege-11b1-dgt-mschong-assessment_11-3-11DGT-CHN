@@ -26,7 +26,8 @@ def start_black():
             value -= 10
             aces -= 1
         return value
-
+    
+    #Set up screen
     wn = Screen()
     wn.title("Blackjack with Turtle")
     wn.bgcolor("green")
@@ -135,6 +136,7 @@ def start_black():
     player_value = calculate_hand_value(player_cards, values, maxvalue)
     ai_value = calculate_hand_value(ai_cards, values, maxvalue)
 
+    #Hit and Stand buttons
     hit = Turtle()
     hit.hideturtle()
     hit.penup()
@@ -171,6 +173,7 @@ def start_black():
     stand.write("STAND", align="center", font=("Consolas", 20, "bold"))
     stand.color("white")
 
+    #Functions for button clicks
     def hit_click(x, y):
         nonlocal player_value
         nonlocal k
@@ -237,6 +240,7 @@ def start_black():
             wn.onkey(reset_game, "space")
             wn.listen()
 
+    #Reset the game function. This is also why I can't use points. Fix Later
     def reset_game():
         wn.clearscreen()
         start_black()
