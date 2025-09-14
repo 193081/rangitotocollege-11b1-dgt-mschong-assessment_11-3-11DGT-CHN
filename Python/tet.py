@@ -14,8 +14,7 @@ def tet_start():
 
     pen = Turtle()
     pen.speed(0)
-    while False:
-        pen.hideturtle()
+    pen.hideturtle()
 
     class Tetromino():
         COLOR_MAP = {
@@ -67,10 +66,6 @@ def tet_start():
     tetromino = Tetromino(random.choice(list(Tetromino.COLOR_MAP.keys())))
     tetromino.print_tetromino()
     tetromino.render(0, 0, pen)
-
-    wn.update()
-    wn.mainloop()
-
     time.sleep(delay)
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ mainscreen.geometry("800x600")
 title_label = Label(mainscreen, text='Game Compendium', bg='black', fg='white', font=('Arial', 24, 'bold'))
 title_label.pack(pady=20)
 
-fullscreen = Button(mainscreen, text ='Fullscreen', width = 25, height = 10, command = lambda: toggle_fullscreen(mainscreen, fullscreen))
+fullscreen = Button(mainscreen, text ='Fullscreen', width = 25, height = 10, command = lambda: toggle_fullscreen(mainscreen))
 fullscreen.place(relx=0.75, rely=0.66, anchor='center')
 
 snake_but = Button(mainscreen, text ='Snake', width = 25, height = 10, command = lambda: snake.start_snek())

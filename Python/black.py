@@ -28,11 +28,11 @@ def start_black():
         return value
     
     #Set up screen
-    wn = Screen()
-    wn.title("Blackjack with Turtle")
-    wn.bgcolor("green")
-    wn.setup(width=800, height=600)
-    wn.tracer(0)
+    casino = Screen()
+    casino.title("Blackjack with Turtle")
+    casino.bgcolor("green")
+    casino.setup(width=800, height=600)
+    casino.tracer(0)
 
     frame = Turtle()
     frame.hideturtle()
@@ -191,16 +191,16 @@ def start_black():
                 pen.color("black")
                 pen.goto(0, -250)
                 pen.write("You Bust! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
-                wn.onkey(reset_game, "space")
+                casino.onkey(reset_game, "space")
                 playing = False
-                wn.listen()
+                casino.listen()
             elif k == 5 and player_value <= maxvalue:
                 pen.color("black")
                 pen.goto(0, -250)
                 pen.write("Five Card Charlie! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
-                wn.onkey(reset_game, "space")
+                casino.onkey(reset_game, "space")
                 playing = False
-                wn.listen()
+                casino.listen()
 
     def stand_click(x, y):
         if 100 <= x <= 200 and -200 <= y <= -160:
@@ -237,21 +237,21 @@ def start_black():
                     pen.goto(0, -250)
                     pen.write("You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
             playing = False
-            wn.onkey(reset_game, "space")
-            wn.listen()
+            casino.onkey(reset_game, "space")
+            casino.listen()
 
     #Reset the game function. This is also why I can't use points. Fix Later
     def reset_game():
-        wn.clearscreen()
+        casino.clearscreen()
         start_black()
 
     def button_click(x, y):
         hit_click(x, y)
         stand_click(x, y)
 
-    wn.onclick(button_click)
-    wn.listen()
-    wn.mainloop()
+    casino.onclick(button_click)
+    casino.listen()
+    casino.mainloop()
     time.sleep(delay)
 
 if __name__ == "__main__":
