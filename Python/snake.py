@@ -84,7 +84,7 @@ def start_snek():
 
     def gameloop():
         nonlocal delay, score, high_score
-        wn.update()
+        area.update()
 
         if abs(head.xcor()) > 400 or abs(head.ycor()) > 400:
             time.sleep(1)
@@ -136,18 +136,18 @@ def start_snek():
                 delay = 0.1
                 pen.clear()
                 pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Consolas", 18, "normal"))
-        wn.ontimer(gameloop, int(delay * 1000))
+        area.ontimer(gameloop, int(delay * 1000))
 
     def quit_game():
         try:
-            wn.bye()
+            area.bye()
         except:
             pass
 
-    wn.getcanvas().winfo_toplevel().protocol("WM_DELETE_WINDOW", quit_game)
+    area.getcanvas().winfo_toplevel().protocol("WM_DELETE_WINDOW", quit_game)
 
     gameloop()
-    wn.mainloop()
+    area.mainloop()
 
 if __name__ == "__main__":
     start_snek()
