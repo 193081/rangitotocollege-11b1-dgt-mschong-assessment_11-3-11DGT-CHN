@@ -1,6 +1,8 @@
 import random
 from turtle import *
 import time
+from turtle import *
+import time
 
 def tet_start():
     delay = 0.1

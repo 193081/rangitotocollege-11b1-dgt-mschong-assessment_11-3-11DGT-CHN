@@ -8,11 +8,11 @@ def start_snek():
     score = 0
     high_score = 0
 
-    wn = Screen()
-    wn.title("Snake with Turtle")
-    wn.bgcolor("black")
-    wn.setup(width=1000, height=800)
-    wn.tracer(0)
+    area = Screen()
+    area.title("Snake with Turtle")
+    area.bgcolor("black")
+    area.setup(width=1000, height=800)
+    area.tracer(0)
 
     frame = Turtle()
     frame.hideturtle()
@@ -72,15 +72,15 @@ def start_snek():
         if head.direction == "right":
             head.setx(head.xcor() + 20)
 
-    wn.listen()
-    wn.onkeypress(go_up, "w")
-    wn.onkeypress(go_up, "Up")
-    wn.onkeypress(go_down, "s")
-    wn.onkeypress(go_down, "Down")
-    wn.onkeypress(go_left, "a")
-    wn.onkeypress(go_left, "Left")
-    wn.onkeypress(go_right, "d")
-    wn.onkeypress(go_right, "Right")
+    area.listen()
+    area.onkeypress(go_up, "w")
+    area.onkeypress(go_up, "Up")
+    area.onkeypress(go_down, "s")
+    area.onkeypress(go_down, "Down")
+    area.onkeypress(go_left, "a")
+    area.onkeypress(go_left, "Left")
+    area.onkeypress(go_right, "d")
+    area.onkeypress(go_right, "Right")
 
     def gameloop():
         nonlocal delay, score, high_score
