@@ -3,7 +3,7 @@ from turtle import *
 import time
 
 def tet_start():
-    delay = 0.1
+    DELAY = 0.1
 
 
     wn = Screen()
@@ -112,7 +112,7 @@ def tet_start():
     game_loop()
     wn.mainloop()
 
-    time.sleep(delay)
+    time.sleep(DELAY)
 
 if __name__ == "__main__":
     tet_start()

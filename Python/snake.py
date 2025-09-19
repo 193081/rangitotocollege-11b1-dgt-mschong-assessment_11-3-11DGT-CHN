@@ -4,7 +4,7 @@ import time
 
 def start_snek():
 
-    delay = 0.1
+    DELAY = 0.1
     score = 0
     high_score = 0
 
@@ -83,7 +83,7 @@ def start_snek():
     area.onkeypress(go_right, "Right")
 
     def gameloop():
-        nonlocal delay, score, high_score
+        nonlocal DELAY, score, high_score
         area.update()
 
         if abs(head.xcor()) > 400 or abs(head.ycor()) > 400:
@@ -94,7 +94,7 @@ def start_snek():
                 seg.goto(1000, 1000)
             segments.clear()
             score = 0
-            delay = 0.1
+            DELAY = 0.1
             pen.clear()
             pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Consolas", 18, "normal"))
 
@@ -108,7 +108,7 @@ def start_snek():
             new_segment.color("green")
             new_segment.penup()
             segments.append(new_segment)
-            delay = max(0.05, delay - 0.001)
+            DELAY = max(0.05, DELAY - 0.001)
             score += 10
             if score > high_score:
                 high_score = score
@@ -133,10 +133,10 @@ def start_snek():
                     seg.goto(1000, 1000)
                 segments.clear()
                 score = 0
-                delay = 0.1
+                DELAY = 0.1
                 pen.clear()
                 pen.write(f"Score: {score}  High Score: {high_score}", align="center", font=("Consolas", 18, "normal"))
-        area.ontimer(gameloop, int(delay * 1000))
+        area.ontimer(gameloop, int(DELAY * 1000))
 
     def quit_game():
         try:
@@ -151,3 +151,4 @@ def start_snek():
 
 if __name__ == "__main__":
     start_snek()
+

@@ -4,9 +4,9 @@ import time
 
 
 def start_black():
-    delay = 0.1
-    maxvalue = 21
-    aimax = 17
+    DELAY = 0.1
+    MAXVALUE = 21
+    AIMAX = 17
     values = {'J': 10, 'Q': 10, 'K': 10, 'T': 10}  # Include 'T' for 10 cards
     k = 2 # Counter for number of cards drawn by player
     playing = True
@@ -133,8 +133,8 @@ def start_black():
     card = deck.get_card()
     ai_cards.append(card)
     card.render(-300, 100, pen)
-    player_value = calculate_hand_value(player_cards, values, maxvalue)
-    ai_value = calculate_hand_value(ai_cards, values, maxvalue)
+    player_value = calculate_hand_value(player_cards, values, MAXVALUE)
+    ai_value = calculate_hand_value(ai_cards, values, MAXVALUE)
 
     #Hit and Stand buttons
     hit = Turtle()
@@ -185,16 +185,16 @@ def start_black():
             player_cards.append(card)
             card.render(-300 + k * 125, -70, pen)
             k += 1
-            player_value = calculate_hand_value(player_cards, values, maxvalue)
+            player_value = calculate_hand_value(player_cards, values, MAXVALUE)
             print(f"Player value: {player_value}")
-            if player_value > maxvalue:
+            if player_value > MAXVALUE:
                 pen.color("black")
                 pen.goto(0, -250)
                 pen.write("You Bust! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
                 casino.onkey(reset_game, "space")
                 playing = False
                 casino.listen()
-            elif k == 5 and player_value <= maxvalue:
+            elif k == 5 and player_value <= MAXVALUE:
                 pen.color("black")
                 pen.goto(0, -250)
                 pen.write("Five Card Charlie! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
@@ -210,17 +210,17 @@ def start_black():
             nonlocal playing
             if not playing:
                 return
-            if player_value == maxvalue and k == 2:
+            if player_value == MAXVALUE and k == 2:
                 pen.goto(0, -250)
                 pen.write("Blackjack! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
             else:
-                while ai_value < aimax and ai_value < player_value:
+                while ai_value < AIMAX and ai_value < player_value:
                     card = deck.get_card()
                     ai_cards.append(card)
                     card.render(-425 + len(ai_cards) * 125, 100, pen)
-                    ai_value = calculate_hand_value(ai_cards, values, maxvalue)
+                    ai_value = calculate_hand_value(ai_cards, values, MAXVALUE)
                     print(f"AI value: {ai_value}")
-                if ai_value > maxvalue:
+                if ai_value > MAXVALUE:
                     pen.color("black")
                     pen.goto(0, -250)
                     pen.write("Dealer Busts! You Win! Press Space to Play Again", align="center", font=("Consolas", 18, "normal"))
@@ -252,7 +252,7 @@ def start_black():
     casino.onclick(button_click)
     casino.listen()
     casino.mainloop()
-    time.sleep(delay)
+    time.sleep(DELAY)
 
 if __name__ == "__main__":
     start_black()
