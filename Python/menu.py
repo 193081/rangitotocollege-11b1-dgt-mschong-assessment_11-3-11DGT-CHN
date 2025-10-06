@@ -7,9 +7,6 @@ def toggle_fullscreen(window):
     is_fullscreen = window.attributes('-fullscreen')
     window.attributes('-fullscreen', not is_fullscreen)
 
-def default_color(item):
-    item.configure(bg='black', fg='white', font=('Arial', 10) )
-
 def run_game(script_name):
     subprocess.Popen([sys.executable, script_name])
 
@@ -32,32 +29,28 @@ mainscreen.geometry("800x600")
 title_label = Label(mainscreen, text='Game Compendium', bg='black', fg='white', font=('Arial', 24, 'bold'))
 title_label.pack(pady=20)
 
-fullscreen = Button(mainscreen, text ='Fullscreen', width = 25, height = 10, command = lambda: toggle_fullscreen(mainscreen))
+fullscreen = Button(mainscreen, text ='Fullscreen', width = 15, height = 5, command = lambda: toggle_fullscreen(mainscreen), bg='gray', fg='black', font=('Arial', 15) )
 fullscreen.place(relx=0.75, rely=0.66, anchor='center')
 
-snake_but = Button(mainscreen, text ='Snake', width = 25, height = 10, command = lambda: run_game("Python/snake.py"))
+snake_but = Button(mainscreen, text ='Snake', width = 15, height = 5, command = lambda: run_game("Python/snake.py"), bg='green', fg='black', font=('Arial', 15) )
 snake_but.place(relx=0.25, rely=0.33, anchor='center')
 
-black_but = Button(mainscreen, text ='Blackjack', width = 25, height = 10, command = lambda: run_game("Python/black.py"))
+black_but = Button(mainscreen, text ='Blackjack', width = 15, height = 5, command = lambda: run_game("Python/black.py"), bg='red', fg='black', font=('Arial', 15) )
 black_but.place(relx=0.25, rely=0.66, anchor='center')
 
-tet_but = Button(mainscreen, text = 'Tetris', width = 25, height = 10, command = lambda: run_game("Python/tet.py"))
+tet_but = Button(mainscreen, text = 'Tetris', width = 15, height = 5, command = lambda: run_game("Python/tet.py"), bg='blue', fg='white', font=('Arial', 15))
 tet_but.place(relx=0.75, rely=0.33, anchor='center')
 
-random_but = Button(mainscreen, text='Random Game', width=25, height=2, command=lambda: random_game(mainscreen))
+random_but = Button(mainscreen, text='Random Game', width=25, height=2, command=lambda: random_game(mainscreen), bg='yellow', fg='black', font=('Arial', 15) )
 random_but.place(relx=0.5, rely=0.5, anchor='center')
 
-quit_but = Button(mainscreen, text='Quit', width=25, height=2, command=mainscreen.quit)
+quit_but = Button(mainscreen, text='Quit', width=10, height=2, command=mainscreen.quit, bg='red', fg='black', font=('Arial', 15) )
 quit_but.place(relx=0.5, rely=0.9, anchor='center')
 
 def exit(event):
     if event.keysym == 'Escape':
         mainscreen.attributes('-fullscreen', False)
         quit()
-
-buttons = [fullscreen, snake_but, black_but, tet_but, quit_but, random_but]
-for button in buttons:
-    default_color(button)
 
 mainscreen.bind('<KeyPress>', exit)
 mainscreen.mainloop()

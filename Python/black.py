@@ -29,7 +29,7 @@ def start_black():
     
     #Set up screen
     casino = Screen()
-    casino.title("Blackjack with Turtle")
+    casino.title("Blackjack")
     casino.bgcolor("green")
     casino.setup(width=800, height=600)
     casino.tracer(0)
