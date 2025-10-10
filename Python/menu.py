@@ -17,7 +17,7 @@ def random_game(window):
     elif i == 1:
         run_game("Python/black.py")
     elif i == 2:
-        run_game("Python/tet.py")
+        run_game("Python/click.py")
     elif i == 3:
         window.quit()
 
@@ -38,7 +38,7 @@ snake_but.place(relx=0.25, rely=0.33, anchor='center')
 black_but = Button(mainscreen, text ='Blackjack', width = 15, height = 5, command = lambda: run_game("Python/black.py"), bg='red', fg='black', font=('Arial', 15) )
 black_but.place(relx=0.25, rely=0.66, anchor='center')
 
-tet_but = Button(mainscreen, text = 'Tetris', width = 15, height = 5, command = lambda: run_game("Python/tet.py"), bg='blue', fg='white', font=('Arial', 15))
+tet_but = Button(mainscreen, text = 'Button clicker', width = 15, height = 5, command = lambda: run_game("Python/click.py"), bg='blue', fg='white', font=('Arial', 15))
 tet_but.place(relx=0.75, rely=0.33, anchor='center')
 
 random_but = Button(mainscreen, text='Random Game', width=25, height=2, command=lambda: random_game(mainscreen), bg='yellow', fg='black', font=('Arial', 15) )
