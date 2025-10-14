@@ -4,10 +4,20 @@ def click_check(x, y):
     print("Clicked at", x, y)
 
 def click_start():
+    score = 0
+
     screen = Screen()
     screen.title("Clicker Simulator")
     screen.bgcolor("lightblue")
     screen.setup(width=1000, height=800)
+
+    pen = Turtle()
+    pen.speed(0)
+    pen.color("black")
+    pen.penup()
+    pen.hideturtle()
+    pen.goto(0, 300)
+    pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
 
     button = Turtle()
     button.hideturtle()
@@ -15,19 +25,23 @@ def click_start():
     button.color('black')
     button.fillcolor('red')
     button.penup()
-    button.goto (0, -25)
-    button.circle(50)
-    button.write("Click Me!", align="center", font=("Arial", 16, "bold"))
+    button.goto (0, -50)
     button.pendown()
     button.begin_fill()
     button.circle(50)
     button.end_fill()
 
+    def buttonfunc(x, y):
+        nonlocal score
+        distance = (x**2 + (y-50)**2)**0.5
+        if distance <= 50:
+            print("Button clicked!")
+            score += 1
+            pen.clear()
+            pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
     
-    while True:
-        screen.onclick(click_check)
-        break
-
+    screen.onclick(buttonfunc)
+    
     def quit_game():
         try:
             screen.bye()
