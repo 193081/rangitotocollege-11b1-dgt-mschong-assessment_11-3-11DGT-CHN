@@ -33,9 +33,10 @@ def click_start():
 
     def buttonfunc(x, y):
         nonlocal score
-        distance = (x**2 + (y-50)**2)**0.5
+        distance = (x**2 + y**2)**0.5
         if distance <= 50:
-            print("Button clicked!")
+            while False:
+                print("Button clicked!")
             score += 1
             pen.clear()
             pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
