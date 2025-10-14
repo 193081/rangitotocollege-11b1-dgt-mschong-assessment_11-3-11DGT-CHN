@@ -6,6 +6,8 @@ def click_check(x, y):
 def click_start():
     score = 0
     increment = 1
+    cost1 = 10 
+    counter = 1
 
     screen = Screen()
     screen.tracer(0)
@@ -50,15 +52,29 @@ def click_start():
         upgrade.right(90)
     upgrade.end_fill()
     upgrade.penup()
-    upgrade.goto(250, -50)
-    upgrade.pendown()
-    upgrade.write("Cost: 10", align="center", font=("Consolas", 12, "normal"))
-    upgrade.penup()
     upgrade.goto(250, -20)
     upgrade.write("Upgrades", align="center", font=("Consolas", 12, "normal"))
+    upgrade.goto(250, -90)
+    upgrade.write("+1", align="center", font=("Consolas", 20, "normal"))
+
+    cost = Turtle()
+    cost.hideturtle()
+    cost.speed(0)
+    cost.goto(250, -50)
+    cost.write(f"Cost: {cost1}", align="center", font=("Consolas", 12, "normal"))
 
     def buttonfunc(x, y):
-        nonlocal score
+        nonlocal score, increment, cost1, counter
+        if 200 <= x <= 300 and -100 <= y <= -50:
+            if score >= cost1:
+                score -= cost1
+                increment += 1
+                counter *= 2
+                cost1 += counter
+                pen.clear()
+                pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
+                cost.clear()
+                cost.write(f"Cost: {cost1}", align="center", font=("Consolas", 12, "normal"))
         distance = (x**2 + y**2)**0.5
         if distance <= 50:
             while False:
@@ -66,8 +82,9 @@ def click_start():
             score += increment
             pen.clear()
             pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
+            
     
-    screen.onclick(click_check)
+    screen.onclick(buttonfunc)
     
     def quit_game():
         try:
