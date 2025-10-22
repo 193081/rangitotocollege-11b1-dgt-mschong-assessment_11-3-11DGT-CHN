@@ -6,8 +6,11 @@ def click_check(x, y):
 def click_start():
     score = 0
     increment = 1
+    #You want to see inefficient coding? HERE YOU GO SUCKA.
     cost1 = 10 
-    counter = 1
+    cost2 = 100
+    counter = 2
+    counter2 = 2
 
     screen = Screen()
     screen.tracer(0)
@@ -69,16 +72,19 @@ def click_start():
             if score >= cost1:
                 score -= cost1
                 increment += 1
-                counter *= 2
+                counter *= 1.5
+                counter = int(counter)
+                print(counter)
                 cost1 += counter
                 pen.clear()
                 pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
                 cost.clear()
                 cost.write(f"Cost: {cost1}", align="center", font=("Consolas", 12, "normal"))
+        if 350 <= x <= 650 and 250 <= y <= 350:
+            if score >= cost2:
+                    pass # Placeholder for second upgrade logic
         distance = (x**2 + y**2)**0.5
         if distance <= 50:
-            while False:
-                print("Button clicked!")
             score += increment
             pen.clear()
             pen.write(f"Score: {score}", align="center", font=("Consolas", 18, "normal"))
