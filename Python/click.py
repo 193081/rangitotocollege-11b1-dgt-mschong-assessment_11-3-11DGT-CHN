@@ -18,7 +18,7 @@ def click_start():
     counter = 2
     counter2 = 2
 
-    #Main screen setup
+    # Main screen setup
     screen = Screen()
     screen.tracer(0)
     screen.title("Clicker Simulator")
@@ -133,6 +133,7 @@ def click_start():
         if -550 <= x <= -450 and 370 <= y <= 410:
             screen.bye()
 
+    # Timer function for auto-increment.
     def timerfunc(milliseconds):
         nonlocal timerinc
         if timerinc >= 1:
@@ -143,11 +144,12 @@ def click_start():
 
     def add_points():
         nonlocal score, timerinc, cost2
-        score += 1
-        pen.clear()
-        pen.write(f"Score: {score}", align="center",
-                  font=("Arial", 24, "bold"))
-        screen.ontimer(lambda: add_points(), timerfunc(1000))
+        if score < 10000:
+            score += 1
+            pen.clear()
+            pen.write(f"Score: {score}", align="center",
+                      font=("Arial", 24, "bold"))
+            screen.ontimer(lambda: add_points(), timerfunc(1000))
 
     # The button operation.
     def buttonfunc(x, y):
@@ -198,6 +200,9 @@ def click_start():
         if score >= 10000:
             screen.clear()
             screen.bgcolor("gold")
+            timerinc = 0
+            score = 0
+            increment = 0
             pen.color("black")
             pen.goto(0, 0)
             pen.write("You win!", align="center",
@@ -212,6 +217,7 @@ def click_start():
     screentk.protocol("WM_DELETE_WINDOW", screen.bye)
 
     screen.mainloop()
+
 
 # Start the game if this file is run directly
 if __name__ == "__main__":
