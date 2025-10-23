@@ -8,8 +8,7 @@ Player can Hit or Stand.
 If player goes over 21, they bust and lose.
 If player gets 5 cards without busting, they win automatically.
 Dealer must hit until their hand is at least 17.
-Good luck. 
-Also I cannot check PEP8 and PEP257 due to the large character amount.
+Good luck.
 """
 
 import random
@@ -338,6 +337,6 @@ def start_black():
     casino.mainloop()
     time.sleep(delay)
 
-
+# Start the game if this file is run directly
 if __name__ == "__main__":
     start_black()

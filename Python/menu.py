@@ -39,6 +39,7 @@ title_label = Label(mainscreen, text='Short Game Compendium', bg='black',
                     fg='white', font=('Arial', 24, 'bold'))
 title_label.pack(pady=20)
 
+# Buttons for each game
 snake_but = Button(mainscreen, text='Snake', width=15, height=5,
                    command=lambda: run_game("Python/snake.py"), bg='green',
                    fg='black', font=('Arial', 24))

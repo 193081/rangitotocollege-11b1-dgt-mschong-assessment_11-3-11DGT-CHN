@@ -18,6 +18,7 @@ def click_start():
     counter = 2
     counter2 = 2
 
+    #Main screen setup
     screen = Screen()
     screen.tracer(0)
     screen.title("Clicker Simulator")
@@ -43,6 +44,7 @@ def click_start():
     pen.goto(0, 300)
     pen.write(f"Score: {score}", align="center", font=("Arial", 24, "bold"))
 
+    # The button
     button = Turtle()
     button.hideturtle()
     button.speed(0)
@@ -58,6 +60,7 @@ def click_start():
     button.goto(0, -20)
     button.write("CLICK ME", align="center", font=("Arial", 25, "bold"))
 
+    # Upgrade buttons
     upgrade = Turtle()
     upgrade.width(3)
     upgrade.hideturtle()
@@ -100,7 +103,8 @@ def click_start():
     cost.goto(250, -120)
     cost.write(f"Cost: {cost2}", align="center", font=("Arial", 12, "normal"))
 
-    quit = Turtle()  # The quit button
+    # Quitting stuff.
+    quit = Turtle()
     quit.hideturtle()
     quit.color("red")
     quit.fillcolor("red")
@@ -145,6 +149,7 @@ def click_start():
                   font=("Arial", 24, "bold"))
         screen.ontimer(lambda: add_points(), timerfunc(1000))
 
+    # The button operation.
     def buttonfunc(x, y):
         nonlocal score, increment, cost1, counter, counter2, cost2, timerinc
         quit_game(x, y)
@@ -208,6 +213,6 @@ def click_start():
 
     screen.mainloop()
 
-
+# Start the game if this file is run directly
 if __name__ == "__main__":
     click_start()

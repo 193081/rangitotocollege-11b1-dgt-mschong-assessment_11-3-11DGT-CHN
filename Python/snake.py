@@ -49,6 +49,7 @@ def start_snek():
 
     area.onkey(area.bye, "Escape")
 
+    # Turtles for the game.
     instructions = Turtle()
     instructions.hideturtle()
     instructions.penup()
@@ -92,7 +93,8 @@ def start_snek():
     pen.goto(0, 450)
     pen.write("Score: 0  High Score: 0", align="center",
               font=("Arial", 18, "normal"))
-
+    
+    # Movement functions
     def go_up():
         if head.direction != "down":
             head.direction = "up"
@@ -133,6 +135,7 @@ def start_snek():
         if -550 <= x <= -450 and 370 <= y <= 410:
             area.bye()
 
+    # The game loop and collision check.
     def gameloop():
         nonlocal delay, score, high_score
         area.update()
@@ -190,7 +193,8 @@ def start_snek():
                 pen.write(f"Score: {score}  High Score: {high_score}",
                           align="center", font=("Arial", 18, "normal"))
         area.ontimer(gameloop, int(delay * 1000))
-
+# End of game loop and collision check.
+# Set up the window close protocol
     areatk.protocol("WM_DELETE_WINDOW", area.bye)
 
     area.onclick(quit_game)
@@ -198,6 +202,6 @@ def start_snek():
     gameloop()
     area.mainloop()
 
-
+# Start the game if this file is run directly
 if __name__ == "__main__":
     start_snek()
