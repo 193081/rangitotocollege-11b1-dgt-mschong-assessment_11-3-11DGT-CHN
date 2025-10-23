@@ -1,18 +1,13 @@
 """This is the main menu for the game compendium.
 
 I wish I could have used pygame to be honest.
+Also, layout changed.
 """
 
 from tkinter import Tk, Label, Button
 import subprocess
 import sys
 from random import randint
-
-
-def toggle_fullscreen(window):
-    """Toggle Fullscreen when clicked."""
-    is_fullscreen = window.attributes('-fullscreen')
-    window.attributes('-fullscreen', not is_fullscreen)
 
 
 def run_game(script_name):
@@ -38,67 +33,52 @@ mainscreen = Tk()
 
 mainscreen.title('Just another game compendium')
 mainscreen.configure(bg='black')
-mainscreen.geometry("800x600")
+mainscreen.attributes('-fullscreen', True)
 
-title_label = Label(mainscreen, text='Game Compendium', bg='black',
+title_label = Label(mainscreen, text='Short Game Compendium', bg='black',
                     fg='white', font=('Arial', 24, 'bold'))
 title_label.pack(pady=20)
 
-fullscreen = Button(mainscreen, text='Fullscreen', width=15, height=5,
-                    command=lambda: toggle_fullscreen(mainscreen),
-                    bg='gray', fg='black', font=('Arial', 15))
-fullscreen.place(relx=0.75, rely=0.66, anchor='center')
-
 snake_but = Button(mainscreen, text='Snake', width=15, height=5,
                    command=lambda: run_game("Python/snake.py"), bg='green',
-                   fg='black', font=('Arial', 15))
-snake_but.place(relx=0.25, rely=0.33, anchor='center')
+                   fg='black', font=('Arial', 24))
+snake_but.place(relx=0.25, rely=0.3, anchor='center')
 
 black_but = Button(mainscreen, text='Blackjack', width=15, height=5,
                    command=lambda: run_game("Python/black.py"), bg='red',
-                   fg='black', font=('Arial', 15))
-black_but.place(relx=0.25, rely=0.66, anchor='center')
+                   fg='black', font=('Arial', 24))
+black_but.place(relx=0.50, rely=0.3, anchor='center')
 
 click_but = Button(mainscreen, text='Button clicker', width=15, height=5,
                    command=lambda: run_game("Python/click.py"), bg='blue',
-                   fg='white', font=('Arial', 15))
-click_but.place(relx=0.75, rely=0.33, anchor='center')
+                   fg='white', font=('Arial', 24))
+click_but.place(relx=0.75, rely=0.3, anchor='center')
 
 random_but = Button(mainscreen, text='Random Game', width=25, height=2,
                     command=lambda: random_game(mainscreen), bg='yellow',
-                    fg='black', font=('Arial', 15))
-random_but.place(relx=0.5, rely=0.5, anchor='center')
+                    fg='black', font=('Arial', 24))
+random_but.place(relx=0.5, rely=0.6, anchor='center')
 
 quit_but = Button(mainscreen, text='Quit', width=10, height=2,
                   command=mainscreen.quit, bg='red', fg='black',
-                  font=('Arial', 15))
+                  font=('Arial', 10))
 quit_but.place(relx=0.5, rely=0.9, anchor='center')
 
+suprise_but = Button(mainscreen, text='Suprise', width=10, height=2,
+                     command=lambda: trip(text_list, suprise_but),
+                     bg='orange', fg='black', font=('Arial', 10))
+suprise_but.place(relx=0.5, rely=0.7, anchor='center')
+
 text_list = [
-    title_label, fullscreen, snake_but, black_but,
-    click_but, random_but, quit_but
+    title_label, snake_but, black_but,
+    click_but, random_but, quit_but, suprise_but
     ]
 
 
-def trip(listtext):
+def trip(listtext, popbut):
     """Make a Suprise."""
     for item in listtext:
-        item.configure(font=('Comic Sans MS', 15))
-
-
-suprise_but = Button(mainscreen, text='Suprise', width=10, height=2,
-                     command=lambda: trip(text_list), bg='orange', fg='black',
-                     font=('Comic Sans MS', 15))
-suprise_but.place(relx=0.5, rely=0.7, anchor='center')
-
-
-def exit(event):
-    """GO AWAY."""
-    if event.keysym == 'Escape':
-        mainscreen.attributes('-fullscreen', False)
-        quit()
-
-
-mainscreen.bind('<KeyPress>', exit)
+        item.configure(font=('Comic Sans MS', 24))
+    popbut.place_forget()
 
 mainscreen.mainloop()

@@ -19,6 +19,44 @@ def start_snek():
     area.setup(width=900, height=900)
     area.tracer(0)
 
+    areatk = area.getcanvas().winfo_toplevel()
+    areatk.attributes("-fullscreen", True)
+
+    quit = Turtle()  # The quit button
+    quit.hideturtle()
+    quit.color("red")
+    quit.fillcolor("red")
+    quit.penup()
+    quit.goto(-500, 450)
+    quit.write("Press 'Esc' to Quit", align="center",
+               font=("Arial", 15, "normal"))
+    quit.goto(-500, 430)
+    quit.write("(Progress is not saved)", align="center",
+               font=("Arial", 10, "normal"))
+    quit.goto(-550, 410)
+    quit.pendown()
+    quit.begin_fill()
+    for _ in range(2):
+        quit.forward(100)
+        quit.right(90)
+        quit.forward(40)
+        quit.right(90)
+    quit.end_fill()
+    quit.penup()
+    quit.goto(-500, 380)
+    quit.color("black")
+    quit.write("Quit", align="center", font=("Arial", 12, "bold"))
+
+    area.onkey(area.bye, "Escape")
+
+    instructions = Turtle()
+    instructions.hideturtle()
+    instructions.penup()
+    instructions.goto(0, 410)
+    instructions.color("white")
+    instructions.write("Use WASD or Arrow Keys to Move", align="center",
+                       font=("Arial", 15, "normal"))
+
     frame = Turtle()
     frame.hideturtle()
     frame.color("white")
@@ -51,9 +89,9 @@ def start_snek():
     pen.color("yellow")
     pen.penup()
     pen.hideturtle()
-    pen.goto(0, 300)
+    pen.goto(0, 450)
     pen.write("Score: 0  High Score: 0", align="center",
-              font=("Consolas", 18, "normal"))
+              font=("Arial", 18, "normal"))
 
     def go_up():
         if head.direction != "down":
@@ -91,6 +129,10 @@ def start_snek():
     area.onkeypress(go_right, "d")
     area.onkeypress(go_right, "Right")
 
+    def quit_game(x, y):
+        if -550 <= x <= -450 and 370 <= y <= 410:
+            area.bye()
+
     def gameloop():
         nonlocal delay, score, high_score
         area.update()
@@ -106,7 +148,7 @@ def start_snek():
             delay = 0.1
             pen.clear()
             pen.write(f"Score: {score}  High Score: {high_score}",
-                      align="center", font=("Consolas", 18, "normal"))
+                      align="center", font=("Arial", 18, "normal"))
 
         if head.distance(food) < 20:
             x = randint(-20, 20) * 20
@@ -124,7 +166,7 @@ def start_snek():
                 high_score = score
             pen.clear()
             pen.write(f"Score: {score}  High Score: {high_score}",
-                      align="center", font=("Consolas", 18, "normal"))
+                      align="center", font=("Arial", 18, "normal"))
 
         for i in range(len(segments)-1, 0, -1):
             x = segments[i-1].xcor()
@@ -146,10 +188,12 @@ def start_snek():
                 score = 0
                 pen.clear()
                 pen.write(f"Score: {score}  High Score: {high_score}",
-                          align="center", font=("Consolas", 18, "normal"))
+                          align="center", font=("Arial", 18, "normal"))
         area.ontimer(gameloop, int(delay * 1000))
 
-    area.getcanvas().winfo_toplevel().protocol("WM_DELETE_WINDOW", area.bye)
+    areatk.protocol("WM_DELETE_WINDOW", area.bye)
+
+    area.onclick(quit_game)
 
     gameloop()
     area.mainloop()
